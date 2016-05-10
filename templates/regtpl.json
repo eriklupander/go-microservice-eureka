@@ -1,0 +1,21 @@
+{
+  "instance": {
+    "hostName":"${ipAddress}",
+    "app":"vendor",
+    "ipAddr":"${ipAddress}",
+    "vipAddress":"${ipAddress}",
+    "secureVipAddress":"${ipAddress}",
+    "status":"UP",
+    "port":"${port}",
+    "securePort" : "8443",
+    "homePageUrl" : "http://${ipAddress}:${port}/",
+    "statusPageUrl": "http://${ipAddress}:${port}/info",
+    "healthCheckUrl": "http://${ipAddress}:${port}/health",
+    "dataCenterInfo" : {
+      "name": "MyOwn"
+    },
+    "metadata": {
+      "instanceId" : "vendor:${instanceId}"
+    }
+  }
+}
