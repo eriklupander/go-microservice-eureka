@@ -9,7 +9,6 @@ import (
 /**
  * From http://thenewstack.io/make-a-restful-json-api-go/
  */
-
 func NewRouter() *mux.Router {
 
 	router := mux.NewRouter().StrictSlash(true)
@@ -25,6 +24,5 @@ func NewRouter() *mux.Router {
 			Name(route.Name).
 			Handler(handler)
 	}
-
 	return router
 }

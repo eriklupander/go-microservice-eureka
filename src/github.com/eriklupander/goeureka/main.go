@@ -6,23 +6,35 @@ import (
         "log"
         "github.com/eriklupander/goeureka/service"
         "github.com/eriklupander/goeureka/eureka"
+        "os"
+        "os/signal"
+        "syscall"
 )
 
 func main() {
+        handleSigterm()                              // Graceful shutdown on Ctrl+C or kill
 
+        go startWebServer()                          // Starts HTTP service  (async)
 
-        go startWebServer()
+        eureka.Register()                            // Performs Eureka registration
 
-        eureka.Register()
-
-        go eureka.StartHeartbeat()
-
-        defer eureka.Deregister()
+        go eureka.StartHeartbeat()                   // Performs Eureka heartbeating (async)
 
         // Block...
-        wg := sync.WaitGroup{}
+        wg := sync.WaitGroup{}                       // Use a WaitGroup to block main() exit
         wg.Add(1)
         wg.Wait()
+}
+
+func handleSigterm() {
+        c := make(chan os.Signal, 1)
+        signal.Notify(c, os.Interrupt)
+        signal.Notify(c, syscall.SIGTERM)
+        go func() {
+                <-c
+                eureka.Deregister()
+                os.Exit(1)
+        }()
 }
 
 func startWebServer() {

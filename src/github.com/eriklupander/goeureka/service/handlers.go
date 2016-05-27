@@ -47,7 +47,6 @@ func VendorShow(w http.ResponseWriter, r *http.Request) {
 	v1 := model.Vendor{ Id: 1, Name : "Internetstore.biz",}
 	v2 := model.Vendor{ Id: 2, Name : "Junkyard.nu",}
 	vendors = append(vendors, v1, v2)
-	// vendors = append(vendors, v2)
 	if len(vendors) > 0 {
 		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 		w.WriteHeader(http.StatusOK)
@@ -63,7 +62,6 @@ func VendorShow(w http.ResponseWriter, r *http.Request) {
 	if err := json.NewEncoder(w).Encode(model.JsonErr{Code: http.StatusNotFound, Text: "Not Found"}); err != nil {
 		panic(err)
 	}
-
 }
 
 

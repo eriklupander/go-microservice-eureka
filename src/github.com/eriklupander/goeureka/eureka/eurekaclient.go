@@ -56,6 +56,7 @@ func heartbeat() {
 }
 
 func Deregister() {
+        fmt.Println("Trying to deregister application...")
         // Deregister
         deregisterAction := HttpAction {
                 Url : "http://192.168.99.100:8761/eureka/apps/vendor/" + util.GetLocalIP() + ":vendor:" + instanceId,

@@ -22,3 +22,6 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+src/github.com/gorilla
+src/github.com/twinj
